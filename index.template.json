@@ -1,0 +1,145 @@
+PUT _index_template/execbeat-main
+{
+  "priority": 98,
+  "template": {
+    "mappings": {
+      "_routing": {
+        "required": false
+      },
+      "numeric_detection": false,
+      "_meta": {
+        "beat": "execbeat",
+        "version": "5.6.2"
+      },
+      "_source": {
+        "excludes": [],
+        "includes": [],
+        "enabled": true
+      },
+      "dynamic": true,
+      "dynamic_templates": [
+        {
+          "strings_as_keyword": {
+            "mapping": {
+              "ignore_above": 1024,
+              "type": "keyword"
+            },
+            "match_mapping_type": "string"
+          }
+        }
+      ],
+      "date_detection": false,
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "cloud": {
+              "type": "object",
+              "properties": {
+                "machine_type": {
+                  "type": "keyword"
+                },
+                "availability_zone": {
+                  "type": "keyword"
+                },
+                "instance_id": {
+                  "type": "keyword"
+                },
+                "project_id": {
+                  "type": "keyword"
+                },
+                "provider": {
+                  "type": "keyword"
+                },
+                "region": {
+                  "type": "keyword"
+                }
+              }
+            }
+          }
+        },
+        "beat": {
+          "type": "object",
+          "properties": {
+            "hostname": {
+              "eager_global_ordinals": false,
+              "index_phrases": false,
+              "fielddata": false,
+              "norms": true,
+              "index": true,
+              "store": false,
+              "type": "text",
+              "index_options": "positions"
+            },
+            "name": {
+              "eager_global_ordinals": false,
+              "index_phrases": false,
+              "fielddata": false,
+              "norms": true,
+              "index": true,
+              "store": false,
+              "type": "text",
+              "index_options": "positions"
+            },
+            "version": {
+              "eager_global_ordinals": false,
+              "index_phrases": false,
+              "fielddata": false,
+              "norms": true,
+              "index": true,
+              "store": false,
+              "type": "text",
+              "index_options": "positions"
+            }
+          }
+        },
+        "exec": {
+          "type": "object",
+          "properties": {
+            "stdout": {
+              "eager_global_ordinals": false,
+              "index_phrases": false,
+              "fielddata": false,
+              "norms": true,
+              "index": true,
+              "store": false,
+              "type": "text",
+              "index_options": "positions"
+            },
+            "exitCode": {
+              "coerce": true,
+              "index": true,
+              "ignore_malformed": false,
+              "store": false,
+              "type": "long",
+              "doc_values": true
+            },
+            "stderr": {
+              "type": "keyword"
+            },
+            "command": {
+              "eager_global_ordinals": false,
+              "index_phrases": false,
+              "fielddata": false,
+              "norms": true,
+              "index": true,
+              "store": false,
+              "type": "text",
+              "index_options": "positions"
+            }
+          }
+        },
+        "tags": {
+          "type": "keyword"
+        }
+      }
+    }
+  },
+  "index_patterns": [
+    "execbeat-*"
+  ],
+  "composed_of": []
+}
