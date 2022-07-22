@@ -1,4 +1,3 @@
-PUT _index_template/execbeat-main
 {
   "priority": 98,
   "template": {
