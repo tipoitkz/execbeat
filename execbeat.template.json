@@ -1,0 +1,43 @@
+{
+  "template": {
+    "mappings": {
+      "doc": {
+      "properties": {
+        "beat": {
+          "properties": {
+            "hostname": {
+              "type": "text"
+            },
+            "name": {
+              "type": "text"
+            },
+            "version": {
+              "type": "text"
+            }
+          }
+        },
+        "exec": {
+          "properties": {
+            "command": {
+              "type": "text"
+            },
+            "exitCode": {
+              "type": "long"
+            },
+            "stderr": {
+              "type": "text"
+            },
+            "stdout": {
+              "type": "text"
+            }
+          }
+        }
+      }
+    }
+    }
+  },
+  "index_patterns": [
+    "execbeat-*"
+  ],
+  "order": 0
+}
